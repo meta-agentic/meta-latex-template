@@ -54,9 +54,10 @@ as workflow artifacts.
 ## How it fits together
 
 - [`common/brand.sty`](common/brand.sty): palette tokens, the mark, the wordmark
-  and the lockup. The mark is the author's logo: the words *evolutivo* and
-  *iterativo* following each other around an infinity sign, drawn in TikZ with
-  its own fixed typeface so it looks the same in every document. Change a colour
+  and the lockup. The mark is the author's logo: the Latin participles
+  *evolvens iterans* (unfolding, repeating) running around an infinity sign as
+  one closed ribbon that passes behind itself, drawn in TikZ with its own fixed
+  typeface so it looks the same in every document. Change a colour
   here and every document follows.
 - [`common/macros.sty`](common/macros.sty): the canonical spelling of every term,
   and the editorial markers `\TODO{}`, `\CLAIM{}`, `\NEEDCITE` that render
