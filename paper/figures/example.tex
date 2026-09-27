@@ -1,0 +1,12 @@
+%% example.tex — a TikZ figure using the shared palette. \input from a section.
+\begin{tikzpicture}[node distance=1.6cm,
+    box/.style={draw=brandPrimary,fill=brandPrimary!8,rounded corners=2pt,
+                minimum width=2.2cm,minimum height=0.8cm,font=\small},
+    arr/.style={-{Latex[length=2mm]},brandInk}]
+  \node[box] (a) {draft};
+  \node[box,right=of a] (b) {review};
+  \node[box,right=of b,draw=brandAccent,fill=brandAccent!12] (c) {survived};
+  \draw[arr] (a) -- (b);
+  \draw[arr] (b) -- (c);
+  \draw[arr,brandMuted] (b.south) to[bend left=40] node[below,font=\scriptsize]{challenged} (a.south);
+\end{tikzpicture}

@@ -1,0 +1,43 @@
+%% brand.sty — the visual identity, defined once for every deliverable.
+%% Palette tokens, a TikZ mark, a wordmark and a lockup. Class-agnostic: no
+%% font packages that would clash with acmart, tufte-book or beamer; needs only
+%% xcolor and tikz. Rename the project in \brandname; restyle the mark in
+%% \brandmark. Every document picks up the change.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{brand}[2026/09/27 document identity]
+
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning}
+
+%% ---- The name ------------------------------------------------------------
+\providecommand{\brandname}{project}
+
+%% ---- Palette -------------------------------------------------------------
+%% Ink on warm paper, a deep-teal primary, an amber accent.
+\definecolor{brandInk}{HTML}{14181F}      % text, spine
+\definecolor{brandPrimary}{HTML}{2F6F6A}  % primary
+\definecolor{brandSecondary}{HTML}{4E8F86}% secondary
+\definecolor{brandAccent}{HTML}{E0A21A}   % highlight
+\definecolor{brandPaper}{HTML}{FBFAF7}    % background
+\definecolor{brandMuted}{HTML}{6B7280}    % secondary text, rules
+
+%% ---- The mark ------------------------------------------------------------
+%% A page with three lines of text, the last one highlighted. Drawn in a 1x1
+%% box; the optional argument is the side length (default 1cm).
+\newcommand{\brandmark}[1][1cm]{%
+  \begin{tikzpicture}[x=#1,y=#1,line cap=round,line join=round]
+    \draw[brandInk,line width=0.10] (0.18,0.06) rectangle (0.82,0.94);
+    \draw[brandPrimary,line width=0.09] (0.30,0.72) -- (0.70,0.72);
+    \draw[brandSecondary,line width=0.09] (0.30,0.52) -- (0.64,0.52);
+    \draw[brandAccent,line width=0.09] (0.30,0.32) -- (0.54,0.32);
+  \end{tikzpicture}%
+}
+
+%% ---- The wordmark and lockup ---------------------------------------------
+\newcommand{\brandwordmark}{{\sffamily\bfseries\color{brandInk}\brandname}}
+\newcommand{\brandlogo}[1][0.9cm]{%
+  \raisebox{-0.32\height}{\brandmark[#1]}\hspace{0.35em}{\Large\brandwordmark}%
+}
+
+\endinput

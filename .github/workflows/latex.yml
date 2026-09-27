@@ -1,0 +1,52 @@
+name: build-pdfs
+
+# Builds every deliverable present on a full TeX Live image and uploads the
+# PDFs. This is the authoritative build; the Makefile's DOCKER mode uses the
+# same image, so local and CI output match. Steps for a deliverable you delete
+# are skipped.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Paper (acmart)
+        if: ${{ hashFiles('paper/paper.tex') != '' }}
+        run: cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error paper.tex
+
+      - name: Slides (beamer)
+        if: ${{ hashFiles('slides/slides.tex') != '' }}
+        run: cd slides && latexmk -pdf -interaction=nonstopmode -halt-on-error slides.tex
+
+      - name: Manual (tufte-book)
+        if: ${{ hashFiles('manual/manual.tex') != '' }}
+        run: cd manual && latexmk -pdf -interaction=nonstopmode -halt-on-error manual.tex
+
+      - name: Brand (TikZ standalones)
+        if: ${{ hashFiles('brand/logo.tex') != '' }}
+        run: cd brand && latexmk -pdf -output-directory=out -interaction=nonstopmode -halt-on-error logo.tex mark.tex wordmark.tex
+
+      - name: Rasterize brand (PNG/SVG)
+        if: ${{ hashFiles('brand/logo.tex') != '' }}
+        run: cd brand && ./build-raster.sh || true
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdfs
+          path: |
+            paper/paper.pdf
+            slides/slides.pdf
+            manual/manual.pdf
+            brand/out/*.pdf
+            brand/out/*.png
+            brand/out/*.svg
+          if-no-files-found: warn

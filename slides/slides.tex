@@ -1,0 +1,34 @@
+%% slides.tex — conference deck. Theme: Brand (slides/beamerthemeBrand.sty).
+%% Build: `make slides` or latexmk -pdf slides.tex (from here).
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Brand}
+\usepackage{../common/macros}
+
+\title{Title of the Talk}
+\author{Author Name}
+\institute{Institution}
+\date{\TODO{venue \& date}}
+
+\begin{document}
+
+\begin{frame}[plain]\titlepage\end{frame}
+
+\begin{frame}{The problem}
+  \begin{itemize}
+    \item One point per line.
+    \item \CLAIM{a claim that must survive review before it is presented}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Thesis}
+  \TODO{The load-bearing slide.}
+\end{frame}
+
+\begin{frame}[plain]
+  \centering\vfill
+  {\brandmark[1.4cm]}\par\vskip0.5cm
+  {\Large\brandwordmark}
+  \vfill
+\end{frame}
+
+\end{document}

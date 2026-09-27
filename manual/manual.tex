@@ -1,0 +1,33 @@
+%% manual.tex — handbook. Class: tufte-book (wide margins, sidenotes).
+%% Engine: pdfLaTeX. Bib: BibTeX via natbib (tufte default), common/refs.bib.
+%% Build: `make manual` or latexmk -pdf manual.tex (from here).
+\documentclass{tufte-book}
+
+\usepackage{../common/brand}
+\usepackage{../common/macros}
+\usepackage{graphicx}
+
+\title{The \project Manual}
+\author{Author Name}
+\publisher{\brandname}
+
+\begin{document}
+
+\maketitle
+
+\newpage\thispagestyle{empty}
+\begin{fullwidth}
+  \vspace*{2cm}\centering
+  \brandmark[2cm]\par\vskip1cm
+  {\large\brandwordmark}\par\vskip0.5cm
+  {\itshape One line on what this manual is for.}
+\end{fullwidth}
+
+\tableofcontents
+
+\input{chapters/01-introduction}
+
+\bibliography{../common/refs}
+\bibliographystyle{plainnat}
+
+\end{document}

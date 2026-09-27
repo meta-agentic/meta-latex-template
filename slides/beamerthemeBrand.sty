@@ -1,0 +1,57 @@
+%% beamerthemeBrand.sty — slide theme on the shared identity.
+%% Activate with \usetheme{Brand}.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeBrand}[2026/09/27 beamer theme]
+
+\RequirePackage{../common/brand}
+
+\mode<presentation>
+
+\setbeamercolor{normal text}{fg=brandInk,bg=brandPaper}
+\setbeamercolor{structure}{fg=brandPrimary}
+\setbeamercolor{frametitle}{fg=brandPaper,bg=brandPrimary}
+\setbeamercolor{title}{fg=brandInk}
+\setbeamercolor{author}{fg=brandMuted}
+\setbeamercolor{itemize item}{fg=brandAccent}
+\setbeamercolor{itemize subitem}{fg=brandPrimary}
+\setbeamercolor{block title}{fg=brandPaper,bg=brandPrimary}
+\setbeamercolor{block body}{bg=brandPrimary!8}
+\setbeamercolor{footline}{fg=brandMuted}
+
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\small\raisebox{0.1ex}{\textbullet}}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.6em]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle%
+  \end{beamercolorbox}%
+  \vskip-0.2pt{\color{brandAccent}\rule{\paperwidth}{1.2pt}}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.6em]{footline}%
+      \raisebox{-0.2ex}{\brandmark[0.34cm]}\hspace{0.4em}\usebeamerfont{footline}\insertshorttitle%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.4ex,dp=1ex,rightskip=0.6em]{footline}%
+      \hfill\insertframenumber/\inserttotalframenumber%
+    \end{beamercolorbox}}%
+}
+
+\setbeamertemplate{title page}{%
+  \vskip1.2cm
+  \begin{centering}
+    {\brandmark[1.6cm]}\par\vskip0.6cm
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+    \vskip0.2cm{\color{brandAccent}\rule{0.5\paperwidth}{1pt}}\par\vskip0.4cm
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}
+    {\small\insertinstitute\par}\vskip0.3cm{\footnotesize\insertdate\par}
+  \end{centering}
+}
+
+\mode<all>
+\endinput

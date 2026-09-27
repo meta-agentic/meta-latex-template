@@ -1,0 +1,23 @@
+%% macros.sty — shared terminology and editorial markers.
+%% One canonical spelling per concept, so every deliverable writes a term the
+%% same way. Add project terms below; never re-spell a term inline.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{macros}[2026/09/27 shared terminology]
+
+\RequirePackage{xspace}
+\RequirePackage{xcolor}
+
+%% ---- Project terms (replace) ---------------------------------------------
+\newcommand{\project}{\mbox{Project}\xspace}
+
+%% ---- Paths and files -----------------------------------------------------
+\newcommand{\pth}[1]{\texttt{#1}}
+
+%% ---- Editorial markers (visible in draft builds) --------------------------
+%% Silence for camera-ready by redefining them empty in the document preamble:
+%%   \renewcommand{\TODO}[1]{}\renewcommand{\CLAIM}[1]{}\renewcommand{\NEEDCITE}{}
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}}
+\newcommand{\CLAIM}[1]{\textcolor{orange}{\textbf{[CLAIM:} #1\textbf{]}}}
+\newcommand{\NEEDCITE}{\textcolor{red}{\textbf{[?cite]}}}
+
+\endinput

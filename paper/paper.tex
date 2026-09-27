@@ -1,0 +1,40 @@
+%% paper.tex — research paper.
+%% Class: ACM acmart in manuscript/nonacm/review draft mode. For a venue, switch
+%%   to e.g. \documentclass[sigconf]{acmart} and set \acmConference.
+%% Engine: pdfLaTeX. Bib: BibTeX (ACM-Reference-Format), common/refs.bib.
+%% Build: `make paper` (repo root) or latexmk -pdf paper.tex (from here).
+\documentclass[manuscript,nonacm,review]{acmart}
+
+\usepackage{../common/brand}
+\usepackage{../common/macros}
+
+\begin{document}
+
+\title{Title of the Paper}
+\subtitle{\CLAIM{provisional — revisit after the argument settles}}
+
+\author{Author Name}
+\affiliation{%
+  \institution{\TODO{institution}}
+  \city{City}\country{Country}}
+\email{author@example.org}
+
+\begin{abstract}
+\TODO{150--200 words. Draft last, from the claims that survived review
+(review/claims.md).}
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012></ccs2012>
+\end{CCSXML}
+\keywords{keyword one, keyword two}
+
+\maketitle
+
+\input{sections/01-introduction}
+\input{sections/02-conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{../common/refs}
+
+\end{document}
