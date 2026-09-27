@@ -1,14 +1,15 @@
 %% brand.sty — the visual identity, defined once for every deliverable.
 %% Palette tokens, a TikZ mark, a wordmark and a lockup. Class-agnostic: no
 %% font packages that would clash with acmart, tufte-book or beamer; needs only
-%% xcolor and tikz. Rename the project in \brandname; restyle the mark in
-%% \brandmark. Every document picks up the change.
+%% xcolor, graphicx and tikz. Rename the project in \brandname. Every document
+%% picks up the change.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{brand}[2026/09/27 document identity]
 
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
-\usetikzlibrary{calc,arrows.meta,positioning}
+\usetikzlibrary{calc,arrows.meta,positioning,decorations.text}
+\RequirePackage{graphicx}
 
 %% ---- The name ------------------------------------------------------------
 \providecommand{\brandname}{project}
@@ -23,21 +24,32 @@
 \definecolor{brandMuted}{HTML}{6B7280}    % secondary text, rules
 
 %% ---- The mark ------------------------------------------------------------
-%% A page with three lines of text, the last one highlighted. Drawn in a 1x1
-%% box; the optional argument is the side length (default 1cm).
-\newcommand{\brandmark}[1][1cm]{%
-  \begin{tikzpicture}[x=#1,y=#1,line cap=round,line join=round]
-    \draw[brandInk,line width=0.10] (0.18,0.06) rectangle (0.82,0.94);
-    \draw[brandPrimary,line width=0.09] (0.30,0.72) -- (0.70,0.72);
-    \draw[brandSecondary,line width=0.09] (0.30,0.52) -- (0.64,0.52);
-    \draw[brandAccent,line width=0.09] (0.30,0.32) -- (0.54,0.32);
-  \end{tikzpicture}%
+%% The author's logo: "evolutivo" and "iterativo" following each other along a
+%% lemniscate, each character scaled by cos^2 of its position so the words
+%% shrink toward the crossing, like a Moebius strip seen edge-on. The drawing
+%% is the author's original, unchanged; the optional argument only sets the
+%% width it is scaled to (default 4cm, its natural size). The lettering is
+%% pinned to the original's typeface, T1 Palatino at 11pt, so the mark looks
+%% the same whatever font the host document uses.
+\newcommand{\brandmarkpicture}{%
+  {\fontencoding{T1}\fontfamily{ppl}\fontseries{m}\fontshape{n}%
+   \fontsize{11pt}{13.6pt}\selectfont
+  \begin{tikzpicture}[decoration={text effects along path,
+      text={evolutivoiterativoevolutivoiterativo},
+      text effects/.cd,
+      repeat text,
+      character count=\m, character total=\n,
+      characters={text along path, scale=.5+.39*cos(180*\m/\n)*cos(180*\m/\n)}}]
+    \path [postaction=decorate, domain=90:446, samples=200]
+      plot ({2*cos(\x)}, {2*sin(\x)*cos(\x)});
+  \end{tikzpicture}}%
 }
+\newcommand{\brandmark}[1][4cm]{\resizebox{#1}{!}{\brandmarkpicture}}
 
 %% ---- The wordmark and lockup ---------------------------------------------
 \newcommand{\brandwordmark}{{\sffamily\bfseries\color{brandInk}\brandname}}
-\newcommand{\brandlogo}[1][0.9cm]{%
-  \raisebox{-0.32\height}{\brandmark[#1]}\hspace{0.35em}{\Large\brandwordmark}%
+\newcommand{\brandlogo}[1][3cm]{%
+  \raisebox{-0.4\height}{\brandmark[#1]}\hspace{0.6em}{\Large\brandwordmark}%
 }
 
 \endinput

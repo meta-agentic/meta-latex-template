@@ -22,7 +22,7 @@ whatever is present.
    gh repo create <owner>/<name> --template meta-agentic/meta-latex-template --private --clone
    ```
 2. Make it yours:
-   - `common/brand.sty`: set `\brandname`, the palette, and the mark.
+   - `common/brand.sty`: set `\brandname` and the palette.
    - `common/macros.sty`: replace `\project` and add your terms.
    - `paper/paper.tex`, `slides/slides.tex`, `manual/manual.tex`: title, authors.
    - `LICENSE`: choose the licence for your content (see below).
@@ -53,8 +53,11 @@ as workflow artifacts.
 
 ## How it fits together
 
-- [`common/brand.sty`](common/brand.sty): palette tokens, the TikZ mark,
-  wordmark and lockup. Change a colour here and every document follows.
+- [`common/brand.sty`](common/brand.sty): palette tokens, the mark, the wordmark
+  and the lockup. The mark is the author's logo: the words *evolutivo* and
+  *iterativo* following each other around an infinity sign, drawn in TikZ with
+  its own fixed typeface so it looks the same in every document. Change a colour
+  here and every document follows.
 - [`common/macros.sty`](common/macros.sty): the canonical spelling of every term,
   and the editorial markers `\TODO{}`, `\CLAIM{}`, `\NEEDCITE` that render
   visibly in draft builds.
